@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Gráfica Express - Conectando você às melhores gráficas{% endblock %}
+
+{% block content %}
+<div class="jumbotron bg-light p-5 rounded">
+    <h1 class="display-4">Bem-vindo à Gráfica Express!</h1>
+    <p class="lead">Conectamos você às melhores gráficas da sua região com preços competitivos e qualidade garantida.</p>
+    <hr class="my-4">
+    <p>Solicite orçamentos, compare preços e receba seus materiais gráficos com rapidez e eficiência.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'products:product_list' %}" role="button">Ver Produtos</a>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-lightning-charge"></i> Rápido</h5>
+                <p class="card-text">Orçamentos em até 24 horas e produção ágil.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-currency-dollar"></i> Econômico</h5>
+                <p class="card-text">Compare preços de diversas gráficas e escolha a melhor opção.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-award"></i> Qualidade</h5>
+                <p class="card-text">Gráficas verificadas e sistema de avaliação para garantir qualidade.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <h2>Produtos em Destaque</h2>
+        <div class="row">
+            {% for product in featured_products %}
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description|truncatewords:15 }}</p>
+                        <p class="card-text"><strong>R$ {{ product.base_price }}</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ product.get_absolute_url }}" class="btn btn-sm btn-outline-primary">Ver detalhes</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p>Nenhum produto em destaque no momento.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

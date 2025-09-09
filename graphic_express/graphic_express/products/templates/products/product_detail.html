@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - Gráfica Express{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h1>{{ product.name }}</h1>
+                <p class="text-muted">{{ product.category.name }}</p>
+                <p>{{ product.description }}</p>
+                
+                {% if product.specifications %}
+                <h5>Especificações Técnicas:</h5>
+                <p>{{ product.specifications }}</p>
+                {% endif %}
+                
+                <h4>Preço base: R$ {{ product.base_price }}</h4>
+                
+                <a href="{% url 'orders:order_create' %}?product={{ product.id }}" class="btn btn-primary btn-lg">
+                    Solicitar Orçamento
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5>Tabela de Preços</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Quantidade Mínima</th>
+                            <th>Quantidade Máxima</th>
+                            <th>Preço por Unidade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rule in product.price_rules.all %}
+                        <tr>
+                            <td>{{ rule.min_quantity }}</td>
+                            <td>{% if rule.max_quantity %}{{ rule.max_quantity }}{% else %}+{% endif %}</td>
+                            <td>R$ {{ rule.price }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" class="text-center">Nenhuma regra de preço definida.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

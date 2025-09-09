@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfica Express - Estrutura Django</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #0066cc;
+            --secondary: #ff6600;
+            --light-bg: #f8f9fa;
+            --dark-bg: #212529;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7f9;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .django-structure {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .folder-structure {
+            font-family: 'Courier New', monospace;
+            background: #2d2d2d;
+            color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        
+        .folder {
+            color: #6cbeff;
+        }
+        
+        .file {
+            color: #f8f9fa;
+            margin-left: 20px;
+        }
+        
+        .app-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .module-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-printer-fill"></i> Gráfica Express - Estrutura Django
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#structure">Estrutura</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#apps">Apps</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#models">Modelos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#deploy">Deploy</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Estrutura Django para Gráfica Express</h1>
+            <p class="lead mb-5">Projeto modular pronto para implementação e deploy</p>
+            <a href="#structure" class="btn btn-light btn-lg">Ver Estrutura Completa</a>
+        </div>
+    </section>
+
+    <!-- Structure Section -->
+    <section id="structure" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Estrutura do Projeto Django</h2>
+                <p class="lead">Organização modular para fácil manutenção e escalabilidade</p>
+            </div>
+            
+            <div class="django-structure">
+                <h4 class="mb-4">Estrutura de Pastas do Projeto</h4>
+                <pre class="folder-structure">
+graphic_express/
+├── <span class="folder">graphic_express/</span>           # Configurações principais do projeto
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+├── <span class="folder">accounts/</span>                 # App de autenticação e usuários
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── templates/accounts/
+├── <span class="folder">core/</span>                     # App principal com funcionalidades centrais
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── templates/core/
+├── <span class="folder">products/</span>                 # App de catálogo de produtos
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── templates/products/
+├── <span class="folder">orders/</span>                   # App de gestão de pedidos
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── templates/orders/
+├── <span class="folder">partners/</span>                 # App de gestão de gráficas parceiras
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── templates/partners/
+├── <span class="folder">payments/</span>                 # App de integração com Mercado Pago
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── templates/payments/
+├── <span class="folder">templates/</span>                # Templates base globais
+│   ├── base.html
+│   ├── header.html
+│   └── footer.html
+├── <span class="folder">static/</span>                   # Arquivos estáticos
+│   ├── css/
+│   ├── js/
+│   ├── images/
+│   └── fonts/
+├── <span class="folder">media/</span>                    # Arquivos de mídia enviados pelos usuários
+├── <span class="file">requirements.txt</span>           # Dependências do projeto
+├── <span class="file">manage.py</span>                 # Script de gerenciamento do Django
+└── <span class="file">.env</span>                       # Variáveis de ambiente (não versionado)
+                </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apps Section -->
+    <section id="apps" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Módulos do Sistema</h2>
+                <p class="lead">Apps Django especializados para cada funcionalidade</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card app-card h-100">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <i class="bi bi-people module-icon"></i>
+                                <h5 class="card-title">Accounts</h5>
+                            </div>
+                            <p class="card-text">Sistema de autenticação e gestão de usuários:</p>
+                            <ul>
+                                <li>Registro e login de clientes</li>
+                                <li>Perfis de usuário personalizados</li>
+                                <li>Gestão de gráficas parceiras</li>
+                                <li>Sistema de permissões</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card app-card h-100">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <i class="bi bi-box-seam module-icon"></i>
+                                <h5 class="card-title">Products</h5>
+                            </div>
+                            <p class="card-text">Catálogo de produtos gráficos:</p>
+                            <ul>
+                                <li>Categorias e tipos de produtos</li>
+                                <li>Especificações técnicas</li>
+                                <li>Galeria de imagens</li>
+                                <li>Sistema de preços base</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card app-card h-100">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <i class="bi bi-cart-check module-icon"></i>
+                                <h5 class="card-title">Orders</h5>
+                            </div>
+                            <p class="card-text">Gestão completa de pedidos:</p>
+                            <ul>
+                                <li>Solicitação de orçamentos</li>
+                                <li>Acompanhamento de status</li>
+                                <li>Histórico de pedidos</li>
+                                <li>Sistema de avaliações</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card app-card h-100">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <i class="bi bi-building module-icon"></i>
+                                <h5 class="card-title">Partners</h5>
+                            </div>
+                            <p class="card-text">Gestão de gráficas parceiras:</p>
+                            <ul>
+                                <li>Cadastro de gráficas</li>
+                                <li>Especialidades e capacidades</li>
+                                <li>Sistema de reputação</li>
+                                <li>Painel administrativo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card app-card h-100">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <i class="bi bi-credit-card module-icon"></i>
+                                <h5 class="card-title">Payments</h5>
+                            </div>
+                            <p class="card-text">Integração com Mercado Pago:</p>
+                            <ul>
+                                <li>Processamento de pagamentos</li>
+                                <li>Gestão de transações</li>
+                                <li>Webhooks para confirmação</li>
+                                <li>Histórico financeiro</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card app-card h-100">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <i class="bi bi-gear module-icon"></i>
+                                <h5 class="card-title">Core</h5>
+                            </div>
+                            <p class="card-text">Funcionalidades centrais:</p>
+                            <ul>
+                                <li>Página inicial e estáticas</li>
+                                <li>Sistema de configurações</li>
+                                <li>APIs internas</li>
+                                <li>Ferramentas administrativas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section id="models" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Principais Modelos Django</h2>
+                <p class="lead">Estrutura de dados para o ecossistema completo</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">App: Accounts</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <strong>CustomUser</strong> - Usuário personalizado com roles
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>CustomerProfile</strong> - Perfil de clientes
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>PartnerProfile</strong> - Perfil de gráficas
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">App: Products</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <strong>Category</strong> - Categorias de produtos
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Product</strong> - Produtos com especificações
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>ProductImage</strong> - Imagens dos produtos
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>PriceRule</strong> - Regras de preço por quantidade
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">App: Orders</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <strong>QuotationRequest</strong> - Solicitação de orçamento
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Quotation</strong> - Orçamento enviado por gráficas
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Order</strong> - Pedido formalizado
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>OrderTracking</strong> - Acompanhamento de status
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Review</strong> - Avaliação de serviços
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">App: Payments</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <strong>Transaction</strong> - Registro de transações
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Payment</strong> - Informações de pagamento
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Payout</strong> - Repasses para gráficas
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-primary">Ver Diagrama Completo de Models</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deploy Section -->
+    <section id="deploy" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2>Preparação para Deploy</h2>
+                <p class="lead">Configurações e requisitos para colocar no ar</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Configurações de Produção</h5>
+                        </div>
+                        <div class="card-body">
+                            <ol class="list-group list-group-numbered">
+                                <li class="list-group-item">
+                                    <strong>Configurar variáveis de ambiente</strong> (DEBUG, SECRET_KEY, DATABASE_URL)
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Configurar banco de dados PostgreSQL</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Configurar servidor de mídia estática</strong> (Whitenoise, AWS S3, etc.)
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Configurar servidor de e-mail</strong>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>Configurar Celery para tarefas assíncronas</strong>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Requisitos do Sistema</h5>
+                        </div>
+                        <div class="card-body">
+                            <h6>requirements.txt</h6>
+                            <pre class="bg-dark text-light p-3 rounded">
+Django==4.2.4
+psycopg2-binary==2.9.6
+pillow==9.5.0
+whitenoise==6.4.0
+gunicorn==20.1.0
+celery==5.2.7
+django-environ==0.9.0
+mercadopago==2.0.1
+django-crispy-forms==2.0
+crispy-bootstrap5==0.7
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Comandos para Iniciar</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Iniciar projeto do zero:</h6>
+                            <pre class="bg-dark text-light p-3 rounded">
+# Criar ambiente virtual
+python -m venv venv
+
+# Ativar no Linux/Mac
+source venv/bin/activate
+
+# Ativar no Windows
+venv\Scripts\activate
+
+# Instalar dependências
+pip install -r requirements.txt
+
+# Criar projeto
+django-admin startproject graphic_express .
+
+# Criar apps
+python manage.py startapp accounts
+python manage.py startapp core
+python manage.py startapp products
+python manage.py startapp orders
+python manage.py startapp partners
+python manage.py startapp payments
+                            </pre>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Comandos de configuração:</h6>
+                            <pre class="bg-dark text-light p-3 rounded">
+# Migrações iniciais
+python manage.py makemigrations
+python manage.py migrate
+
+# Criar superusuário
+python manage.py createsuperuser
+
+# Coletar arquivos estáticos
+python manage.py collectstatic
+
+# Testar servidor
+python manage.py runserver
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Next Steps -->
+    <section class="py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">Próximos Passos</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="d-grid gap-2">
+                        <a href="#" class="btn btn-primary btn-lg">
+                            <span class="step-number">1</span>
+                            Configurar Ambiente de Desenvolvimento
+                        </a>
+                        <a href="#" class="btn btn-primary btn-lg">
+                            <span class="step-number">2</span>
+                            Implementar Models Básicos
+                        </a>
+                        <a href="#" class="btn btn-primary btn-lg">
+                            <span class="step-number">3</span>
+                            Criar Sistema de Autenticação
+                        </a>
+                        <a href="#" class="btn btn-primary btn-lg">
+                            <span class="step-number">4</span>
+                            Desenvolver Catálogo de Produtos
+                        </a>
+                        <a href="#" class="btn btn-primary btn-lg">
+                            <span class="step-number">5</span>
+                            Implementar Sistema de Pedidos
+                        </a>
+                        <a href="#" class="btn btn-primary btn-lg">
+                            <span class="step-number">6</span>
+                            Integrar com Mercado Pago
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h5>Gráfica Express - Projeto Django</h5>
+                    <p>Ecossistema completo para conectar clientes e gráficas.</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#structure" class="text-decoration-none text-white">Estrutura</a></li>
+                        <li><a href="#apps" class="text-decoration-none text-white">Apps</a></li>
+                        <li><a href="#models" class="text-decoration-none text-white">Modelos</a></li>
+                        <li><a href="#deploy" class="text-decoration-none text-white">Deploy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Recursos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-white">Documentação</a></li>
+                        <li><a href="#" class="text-decoration-none text-white">Repositório GitHub</a></li>
+                        <li><a href="#" class="text-decoration-none text-white">Tutoriais</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p class="mb-0">&copy; 2023 Gráfica Express - Projeto Django Modular</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Perfil de {{ request.user.username }}</h2>
+<p>Email: {{ request.user.email }}</p>
+<p>Tipo: {{ request.user.get_user_type_display }}</p>
+{% endblock %}
